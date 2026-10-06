@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#f5f3ff">
+	<title>點擊計數器</title>
+	<style>
+		:root {
+			color-scheme: light;
+			font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+			color: #242044;
+			background: #f5f3ff;
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			min-height: 100vh;
+			margin: 0;
+			display: grid;
+			place-items: center;
+			padding: 24px;
+			background:
+				radial-gradient(circle at 15% 18%, #e5ddff 0, transparent 30%),
+				radial-gradient(circle at 90% 85%, #d9f3ff 0, transparent 28%),
+				#f8f7ff;
+		}
+
+		main {
+			width: min(100%, 480px);
+			padding: 56px 36px 44px;
+			text-align: center;
+			border: 1px solid rgba(255, 255, 255, .9);
+			border-radius: 28px;
+			background: rgba(255, 255, 255, .82);
+			box-shadow: 0 24px 70px rgba(76, 61, 139, .14);
+			backdrop-filter: blur(12px);
+		}
+
+		.eyebrow {
+			margin: 0 0 12px;
+			color: #7868c8;
+			font-size: .8rem;
+			font-weight: 700;
+			letter-spacing: .2em;
+		}
+
+		h1 {
+			margin: 0;
+			font-size: clamp(2rem, 8vw, 2.7rem);
+			letter-spacing: .04em;
+		}
+
+		.subtitle {
+			margin: 12px 0 32px;
+			color: #85819a;
+			font-size: .98rem;
+		}
+
+		.counter {
+			display: grid;
+			place-items: center;
+			min-height: 176px;
+			margin-bottom: 30px;
+			border: 1px solid #eeeaff;
+			border-radius: 22px;
+			background: linear-gradient(145deg, #faf9ff, #f0edff);
+		}
+
+		#count {
+			color: #6552c4;
+			font-size: clamp(4rem, 18vw, 6rem);
+			font-weight: 800;
+			line-height: 1;
+			font-variant-numeric: tabular-nums;
+		}
+
+		button {
+			width: 100%;
+			min-height: 62px;
+			border: 0;
+			border-radius: 16px;
+			background: linear-gradient(135deg, #806ce0, #6552c4);
+			box-shadow: 0 10px 22px rgba(101, 82, 196, .28);
+			color: white;
+			font: inherit;
+			font-size: 1.08rem;
+			font-weight: 700;
+			cursor: pointer;
+			transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+		}
+
+		button:hover {
+			filter: brightness(1.06);
+			transform: translateY(-2px);
+			box-shadow: 0 14px 26px rgba(101, 82, 196, .34);
+		}
+
+		button:active { transform: translateY(1px) scale(.99); }
+		button:focus-visible { outline: 3px solid #b9adff; outline-offset: 4px; }
+
+		.hint {
+			margin: 18px 0 0;
+			color: #a09caf;
+			font-size: .82rem;
+		}
+
+		@media (max-width: 420px) {
+			main { padding: 44px 24px 34px; }
+			.counter { min-height: 150px; }
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<p class="eyebrow">ONE CLICK AT A TIME</p>
+		<h1>點擊計數器</h1>
+		<p class="subtitle">按下按鈕，累積每一次的小小成就</p>
+
+		<section class="counter" aria-label="目前計數">
+			<output id="count" aria-live="polite">0</output>
+		</section>
+
+		<button id="countButton" type="button">＋　點我加一</button>
+		<p class="hint">每次點擊，數字就會增加 1</p>
+	</main>
+
+	<script>
+		const countDisplay = document.querySelector('#count');
+		const countButton = document.querySelector('#countButton');
+		let count = 0;
+
+		countButton.addEventListener('click', () => {
+			count += 1;
+			countDisplay.textContent = count;
+		});
+	</script>
+</body>
+</html>
